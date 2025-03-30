@@ -1,0 +1,189 @@
+:root {
+    --gradient-1: linear-gradient(135deg, #6C63FF 0%, #4CAF50 100%);
+    --gradient-2: linear-gradient(135deg, #FF6B6B 0%, #6C63FF 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    background: #41423b;
+}
+
+.heading-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heading-box img {
+    margin-right: 10px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.heading {
+    color: #fff;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    background: var(--gradient-2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.editor {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.code-editor {
+    /* max-width: 40%; */
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+iframe {
+    border: 2px solid black;
+    height: 100vh;
+    width: 100%;
+    background: white;
+}
+
+.run-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid black;
+    background: #282822;
+    padding: 10px;
+}
+
+.run-btn .run-code {
+    color: #fff;
+    margin: 5px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.run-btn .run-code:hover {
+    opacity: 0.5;
+}
+
+.html {
+    background-color: #dc4c24;
+}
+
+.css {
+    background-color: #663296;
+}
+
+.output {
+    background-color: #0f9e59;
+}
+
+.theme {
+    border: 1px solid white;
+    background-color: #282822;
+}
+
+.status-circle {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-left: 5px;
+    background-color: transparent;
+    border: 2px solid white;
+    vertical-align: middle;
+}
+
+.status-circle.filled {
+    background-color: white;
+    border: none;
+}
+
+.CodeMirror {
+    font-size: 25px;
+    margin: 2px;
+    height: 100vh;
+}
+
+.editor-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding: 5px 10px;
+    background: #41423b;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.html-label {
+    color: #fbff5b;
+}
+
+.css-label {
+    color: #4ccbff;
+}
+
+/* CSS Code */
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    display: none;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .run-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .sattings-btn {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 90px;
+        left: 0;
+        width: 100%;
+        background: #333;
+        padding: 10px;
+        z-index: 1;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .sattings-btn button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    #preview {
+        display: none;
+    }
+
+    .editor {
+        width: 100%;
+    }
+
+    .heading {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,8 @@
+@media (max-width : 750px) {
+    #htmlCode, #cssCode {
+        width: 100vw;
+    }
+}
+
+
+

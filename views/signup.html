@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/login.css" class="css">
+    <link rel="stylesheet" href="/public/css/index.css" class="css">
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <header class="header-title">
+        <div class="logo-box">
+            <img src="./Img/logo.png" alt="Logo" class="logo">
+            <h1 class="brand">Quick Code Studio : Sign up</h1>
+        </div>
+    </header>
+    
+    <div class="container">
+        <form id="signinForm" action="/signup" method="POST" class="contact-form">
+            <h2 class="section-heading">Join us today! Create your account now.</h2>
+            <div class="form-group">
+                <input type="text" id="username" name="username" required>
+                <label for="username">Username</label>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" required>
+                <label for="password">Password</label>
+            </div>
+            <button class="submit-btn" type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+
+</html>

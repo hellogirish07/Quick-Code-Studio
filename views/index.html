@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Code Studio - Live HTML Editor</title>
+    <link rel="icon" type="image/x-icon" href="./logo.ico">
+    <link rel="stylesheet" href="/public/css/index.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/resp.css" class="css">
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Add Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-gradient"></div>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo-box">
+                <img src="./Img/logo.png" alt="Logo" class="logo">
+                <h1 class="brand">Quick Code Studio</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content fade-in" data-animate>
+            <h1 class="main-heading">Experience Coding in<br>Real Time with <br> Quick Code Studio</h1>
+            <p class="sub-heading">Write, edit, and preview your HTML and CSS code instantly, without any hassle.</p>
+            <div class="hero-btn">
+                <a onclick="location.href='/signin.html'" class="cta-btn primary">Start Coding</a>
+                <a href="#features" class="cta-btn secondary">Explore Features</a>
+            </div>
+        </div>
+        <div class="hero-image fade-in" data-animate>
+            <div class="image-container">
+                <img src="./Img/preview-2.png" alt="Code Editor Preview">
+                <div class="image-overlay"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features fade-in" data-animate>
+        <h2 class="section-heading">Why Choose Our Code Editor?</h2>
+        <div class="feature-box">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Real-Time Preview</h3>
+                <p>See your changes in HTML and CSS come to life as you type. No need to refresh or switch tabs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3>Simple Interface</h3>
+                <p>An intuitive layout designed to help both beginners and pros code efficiently.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h3>Toggle Between HTML and CSS</h3>
+                <p>Easily switch between editing HTML and CSS code with a single click. Customize your web pages on the
+                    go.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <h3>Output at Your Fingertips</h3>
+                <p>Check how your code renders instantly by viewing the output directly on the same page.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about fade-in" data-animate>
+        <div class="about-content">
+            <div class="about-text">
+                <h2 class="section-heading">About Quick Code Studio</h2>
+                <p>Quick Code Studio is dedicated to providing seamless web development tools that enhance your coding
+                    experience. Our Live HTML Editor lets you build and test your web projects faster and more
+                    effectively.</p>
+                <p>Our editor is designed with simplicity in mind, so users can focus on what matters most—writing code.
+                    With separate sections for HTML and CSS, along with a live preview, we ensure that you can design
+                    and refine web pages efficiently.</p>
+                <p>We are constantly evolving and updating the editor to keep up with modern web standards. Join our
+                    growing community of developers, explore new techniques, and build stunning projects with ease.</p>
+            </div>
+            <div class="about-image">
+                <div class="image-container">
+                    <img src="./Img/preview-2.png" alt="Code Editor Preview">
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience fade-in" data-animate>
+        <h2 class="section-heading">Experience Our Code Editor</h2>
+        <div class="code-preview">
+            <div class="code-header">
+                <div class="code-title">index.html</div>
+                <div class="code-controls">
+                    <span class="control close"></span>
+                    <span class="control minimize"></span>
+                    <span class="control maximize"></span>
+                </div>
+            </div>
+            <div class="code-content">
+                <pre><code class="language-html">
+<span class="line"><span class="tag">&lt;!DOCTYPE html&gt;</span></span>
+<span class="line"><span class="tag">&lt;html&gt;</span></span>
+<span class="line"><span class="tag">&lt;head&gt;</span></span>
+<span class="line">    <span class="tag">&lt;title&gt;</span>My First Website<span class="tag">&lt;/title&gt;</span></span>
+<span class="line">    <span class="tag">&lt;style&gt;</span></span>
+<span class="line">        <span class="selector">body</span> {</span>
+<span class="line">            <span class="property">background</span>: <span class="value">#1a1a1a</span>;</span>
+<span class="line">            <span class="property">color</span>: <span class="value">#ffffff</span>;</span>
+<span class="line">            <span class="property">font-family</span>: <span class="value">'Poppins', sans-serif</span>;</span>
+<span class="line">        }</span>
+<span class="line">    <span class="tag">&lt;/style&gt;</span></span>
+<span class="line"><span class="tag">&lt;/head&gt;</span></span>
+<span class="line"><span class="tag">&lt;body&gt;</span></span>
+<span class="line">    <span class="tag">&lt;h1&gt;</span>Welcome to My Website<span class="tag">&lt;/h1&gt;</span></span>
+<span class="line">    <span class="tag">&lt;p&gt;</span>Start coding with our live editor!<span class="tag">&lt;/p&gt;</span></span>
+<span class="line"><span class="tag">&lt;/body&gt;</span></span>
+<span class="line"><span class="tag">&lt;/html&gt;</span></span>
+                </code></pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact fade-in" data-animate>
+        <h2 class="section-heading">Get In Touch</h2>
+        <p>If you have any questions or feedback, feel free to reach out to us. We'd love to hear from you!</p>
+        <form id="contactForm" class="contact-form"
+            action="https://api.web3forms.com/submit"
+            method="POST">
+            <input type="hidden" name="access_key" value="33d44239-b74e-45c4-be8a-5c9f3feaab1d">
+
+            <div class="form-group">
+                <input type="text" id="name" name="name" required>
+                <label for="name">Your Name</label>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" name="email" required>
+                <label for="email">Your Email</label>
+            </div>
+            <div class="form-group">
+                <textarea id="message" name="message" required></textarea>
+                <label for="message">Your Message</label>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+        <p id="responseMessage"></p>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="logo-box">
+                <img src="./Img/logo.png" alt="Logo" class="logo">
+                <h1 class="brand">Quick Code Studio</h1>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 Quick Code Studio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/public/js/google-form.js"></script>
+</body>
+
+</html>
