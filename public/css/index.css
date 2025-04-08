@@ -479,6 +479,15 @@ body {
     font-size: 2rem;
 }
 
+footer li{
+    list-style: none;
+    margin: 5px;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+
 .social-links {
     display: flex;
     justify-content: center;
