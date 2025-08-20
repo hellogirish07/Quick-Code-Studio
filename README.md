@@ -72,11 +72,7 @@ The app will be available at `http://localhost:3000` (or the port specified in y
 - **data/**: User data storage
 - **Img/**: Images and logos
 
-## License
-Specify your license here (e.g., MIT, Apache 2.0, etc.)
-
 ## Author
-- Your Name
+- GIrish Suthar
 
----
-Feel free to update this README with more details as your project evolves.
+
