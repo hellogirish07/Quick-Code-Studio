@@ -16,8 +16,9 @@
     top: 0;
     right: -500px;
     width: 500px;
-    height: 100vh;
-    background: #282822f7;
+    /* height: 100vh; */
+    height: auto;
+    background: #282822d5;
     color: white;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
     transition: 0.3s;
@@ -77,13 +78,19 @@
     border: 1px solid #ccc;
 }
 
-.sidebar-content input {
-    border: none;
+.sidebar-content input, .sidebar-content select {
+    /* border: none; */
     background: transparent;
     border: 2px solid white;
     font-size: 25px;
     outline: none;
     color: white;
+}
+
+.sidebar-content select option {
+    background: #282822d5;
+    border: 2px solid white;
+    font-size: 25px;
 }
 
 .sidebar .theme {
@@ -117,7 +124,7 @@
 }
 
 .save-code {
-    background: #0f9e59;
+    background: #0969b7;
 }
 
 .log-out {
@@ -183,7 +190,7 @@
 }
 
 input:checked + .slider {
-    background-color: #0f9e59;
+    background-color: #0969b7;
 }
 
 input:checked + .slider:before {
