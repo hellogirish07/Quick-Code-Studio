@@ -1,3 +1,5 @@
+
+
 /* Modern Dark Theme CSS */
 :root {
     --primary-color: #6C63FF;
@@ -431,6 +433,8 @@ body {
 }
 
 /* Footer */
+
+/* Footer */
 .footer {
     background: var(--background-dark);
     padding: 4rem 2rem 2rem;
@@ -457,17 +461,33 @@ body {
     z-index: 1;
 }
 
-.footer .logo-box {
+/* .footer .logo-box {
     display: flex;
     align-items: center;
     gap: 1rem;
     margin-bottom: 2rem;
+} */
+
+.footer .logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.footer .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
 .footer .logo {
     width: 60px;
     height: 60px;
     border-radius: 50%;
+    padding: 5px;
     transition: transform 0.3s ease;
 }
 
@@ -485,6 +505,57 @@ footer li{
     font-size: 1.2rem;
     color: var(--text-secondary);
     transition: color 0.3s ease;
+}
+
+/* Simple Newsletter Styles */
+/* .newsletter-box {
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+    max-width: 400px;
+    box-shadow: none;
+    text-align: left;
+} */
+.newsletter-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.3rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.newsletter-form {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
+    flex-wrap: wrap;
+}
+
+.newsletter-form input[type="email"] {
+    padding: 0.4rem 0.7rem;
+    border-radius: 12px;
+    border: 1px solid #444;
+    background: #181818;
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+    min-width: 120px;
+}
+
+.newsletter-form .submit-btn {
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
+    width: auto;
+    margin: 0;
+}
+#newsletterMsg {
+    color: #0f0;
+    margin-top: 0.2rem;
+    font-size: 0.95rem;
+    min-height: 1.1em;
 }
 
 
@@ -534,6 +605,7 @@ footer li{
     opacity: 1;
     transform: translateY(0);
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
