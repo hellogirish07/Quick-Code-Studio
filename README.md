@@ -4,6 +4,8 @@
 
 Quick Code Studio is a web-based code editor and management platform. It provides a simple interface for users to write, edit, and manage code snippets, with authentication and user management features.
 
+Quick Code Studio is a web-based live code editor that enables users to write, edit, and preview HTML, CSS, and JavaScript in real time, featuring user authentication, project management, a modern responsive UI with CodeMirror integration, theme switching, and a built-in JavaScript terminal, making it ideal for students, educators, and developers seeking a simple, interactive coding environment.
+
 ## Features
 
 - User authentication (sign up, sign in)
@@ -76,6 +78,7 @@ The app will be available at `http://localhost:3000` (or the port specified in y
 
 ## Author
 - GIrish Suthar
+
 
 
 
