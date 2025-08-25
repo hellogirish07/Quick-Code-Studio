@@ -1,18 +1,81 @@
+// Helper: get cookie by name
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+// On load, set localStorage.username from cookie if not present
+document.addEventListener('DOMContentLoaded', function() {
+    if (!localStorage.getItem('username')) {
+        const cookieUser = getCookie('username');
+        if (cookieUser) localStorage.setItem('username', cookieUser);
+    }
+    const saveBtn = document.getElementById('saveProjectBtn');
+    const loadBtn = document.getElementById('loadProjectBtn');
+    if (saveBtn) saveBtn.addEventListener('click', saveProject);
+    if (loadBtn) loadBtn.addEventListener('click', loadProjects);
+});
+
+// --- Project Save/Load Functions (SQLite backend) ---
+// Save project to server
+function saveProject() {
+    const username = localStorage.getItem('username'); // Or get from session
+    const name = prompt('Enter project name:');
+    if (!name || !username) return alert('Missing project name or user.');
+    const html = htmlEditor.getValue();
+    const css = cssEditor.getValue();
+    fetch('/project/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, name, html, css })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) alert('Project saved!');
+        else alert('Failed to save project.');
+    })
+    .catch(() => alert('Error saving project.'));
+}
+
+// Load all projects for user
+function loadProjects() {
+    const username = localStorage.getItem('username');
+    if (!username) return alert('No user.');
+    fetch(`/project/list?username=${encodeURIComponent(username)}`)
+        .then(res => res.json())
+        .then(projects => {
+            // Show project list (simple prompt for now)
+            const names = projects.map(p => p.name).join('\n');
+            const pick = prompt('Your projects:\n' + names + '\nEnter project name to load:');
+            const proj = projects.find(p => p.name === pick);
+            if (proj) {
+                htmlEditor.setValue(proj.html || '');
+                cssEditor.setValue(proj.css || '');
+            }
+        });
+}
+
+
 document.getElementById('htmlCode').addEventListener('input', RunCode);
 document.getElementById('cssCode').addEventListener('input', RunCode);
+// Add event for JS code (will be handled by CodeMirror below)
 
 const settingsBtn = document.getElementById("settingsBtn");
 const sidebar = document.getElementById("sidebar");
 const closeSidebar = document.getElementById("closeSidebar");
 const downloadCodeBtn = document.getElementById("downloadCodeBtn");
 
+
 // Main Concept Code for Code Editor 
 // RunCode Function autometically Event Listeners Ke kaaran Call ho raha he 
 function RunCode() {
     const htmlCode = document.getElementById('htmlCode').value;
     const cssCode = '<style>' + document.getElementById('cssCode').value + '</style>';
+    const jsCode = document.getElementById('jsCode') ? document.getElementById('jsCode').value : '';
     const previewFrame = document.getElementById('preview');
-    previewFrame.contentDocument.body.innerHTML = htmlCode + cssCode;
+    // For legacy support, but CodeMirror will handle preview
+    previewFrame.contentDocument.body.innerHTML = htmlCode + cssCode + (jsCode ? `<script>${jsCode}<\/script>` : '');
 }
 
 // Toggle HTML
@@ -71,10 +134,11 @@ function toggleCSS() {
     }
 }
 
+
 // Initialize CodeMirror for HTML
 const htmlEditor = CodeMirror.fromTextArea(document.getElementById('htmlCode'), {
     mode: 'xml', // Use 'htmlmixed' for HTML with embedded CSS/JS
-    theme: 'dracula', // Default theme
+    theme: 'monokai', // Default theme
     lineNumbers: true,
     autoCloseTags: true,
     matchBrackets: true,
@@ -84,24 +148,41 @@ const htmlEditor = CodeMirror.fromTextArea(document.getElementById('htmlCode'), 
 // Initialize CodeMirror for CSS
 const cssEditor = CodeMirror.fromTextArea(document.getElementById('cssCode'), {
     mode: 'css',
-    theme: 'dracula', // Default theme
-    lineNumbers: true,
+    theme: 'monokai', // Default theme
+    lineNumbers: false,
     lineWrapping: true,
     autoCloseBrackets: true,
     matchBrackets: true,
 });
 
+// Initialize CodeMirror for JS
+let jsEditor = null;
+if (document.getElementById('jsCode')) {
+    jsEditor = CodeMirror.fromTextArea(document.getElementById('jsCode'), {
+        mode: 'javascript',
+        theme: 'monokai',
+        lineNumbers: false,
+        lineWrapping: true,
+        autoCloseBrackets: true,
+        matchBrackets: true,
+    });
+}
+
 // Theme switching logic
+
 document.getElementById('themeSelector').addEventListener('change', (event) => {
     const selectedTheme = event.target.value;
     htmlEditor.setOption('theme', selectedTheme);
     cssEditor.setOption('theme', selectedTheme);
+    if (jsEditor) jsEditor.setOption('theme', selectedTheme);
 });
+
 
 // Function to update the iframe preview
 function ShowOutput() {
     const htmlContent = htmlEditor.getValue();
     const cssContent = `<style>${cssEditor.getValue()}</style>`;
+    const jsContent = jsEditor ? `<script>${jsEditor.getValue()}<\/script>` : '';
     const previewFrame = document.getElementById('preview');
     const previewDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
     previewDoc.open();
@@ -112,6 +193,7 @@ function ShowOutput() {
             </head>
             <body>
                 ${htmlContent}
+                ${jsContent}
             </body>
         </html>
     `);
@@ -119,8 +201,10 @@ function ShowOutput() {
 }
 
 // Event listeners to update preview in real-time (optional)
+
 htmlEditor.on('change', ShowOutput);
 cssEditor.on('change', ShowOutput);
+if (jsEditor) jsEditor.on('change', ShowOutput);
 
 // Open Sidebar
 settingsBtn.addEventListener("click", () => {
@@ -131,6 +215,7 @@ settingsBtn.addEventListener("click", () => {
 closeSidebar.addEventListener("click", () => {
     sidebar.classList.remove("open");
 });
+
 
 // Change Font Size
 function changeFontSize(size) {
@@ -152,29 +237,36 @@ function changeFontFamily(fontFamily) {
 function toggleLineNumbers(show) {
     htmlEditor.setOption('lineNumbers', show);
     cssEditor.setOption('lineNumbers', show);
+    if (jsEditor) jsEditor.setOption('lineNumbers', show);
 }
 
 // Toggle Word Wrap
 function toggleWordWrap(wrap) {
     htmlEditor.setOption('lineWrapping', wrap);
     cssEditor.setOption('lineWrapping', wrap);
+    if (jsEditor) jsEditor.setOption('lineWrapping', wrap);
 }
 
 // Clear Code
+
 document.getElementById('clearCodeBtn').addEventListener('click', () => {
     htmlEditor.setValue('');
     cssEditor.setValue('');
+    if (jsEditor) jsEditor.setValue('');
 });
 
 // Download Code Function
+
 downloadCodeBtn.addEventListener("click", () => {
     const htmlContent = htmlEditor.getValue();
     const cssContent = cssEditor.getValue();
+    const jsContent = jsEditor ? jsEditor.getValue() : '';
 
     const zip = new JSZip();
     const folder = zip.folder("Quick Code Studio Project");
     folder.file("index.html", htmlContent);
     folder.file("style.css", cssContent);
+    if (jsContent) folder.file("script.js", jsContent);
 
     zip.generateAsync({ type: "blob" }).then(content => {
         const link = document.createElement("a");
@@ -230,11 +322,12 @@ if (typeof Swal === 'undefined') {
 // Global variable to store the full-screen window reference
 let fullScreenWindow = null;
 
+
 // Function to open output in full screen
 function openFullScreenOutput() {
     const htmlContent = htmlEditor.getValue();
     const cssContent = `<style>${cssEditor.getValue()}</style>`;
-    
+    const jsContent = jsEditor ? `<script>${jsEditor.getValue()}<\/script>` : '';
     // Create a new window with the output
     fullScreenWindow = window.open('', '_blank');
     fullScreenWindow.document.write(`
@@ -248,6 +341,7 @@ function openFullScreenOutput() {
             </head>
             <body>
                 ${htmlContent}
+                ${jsContent}
             </body>
         </html>
     `);
@@ -264,7 +358,7 @@ function updateFullScreenOutput() {
     if (fullScreenWindow && !fullScreenWindow.closed) {
         const htmlContent = htmlEditor.getValue();
         const cssContent = `<style>${cssEditor.getValue()}</style>`;
-        
+        const jsContent = jsEditor ? `<script>${jsEditor.getValue()}<\/script>` : '';
         fullScreenWindow.document.write(`
             <!DOCTYPE html>
             <html>
@@ -276,6 +370,7 @@ function updateFullScreenOutput() {
                 </head>
                 <body>
                     ${htmlContent}
+                    ${jsContent}
                 </body>
             </html>
         `);
@@ -284,12 +379,118 @@ function updateFullScreenOutput() {
 }
 
 // Add event listeners for real-time updates
+
 htmlEditor.on('change', function() {
     ShowOutput();
     updateFullScreenOutput();
 });
-
 cssEditor.on('change', function() {
     ShowOutput();
     updateFullScreenOutput();
 });
+if (jsEditor) jsEditor.on('change', function() {
+    ShowOutput();
+    updateFullScreenOutput();
+});
+
+function showEditor(editor) {
+    document.getElementById("html-editor").classList.add("hidden");
+    document.getElementById("css-editor").classList.add("hidden");
+    if (document.getElementById("js-editor")) document.getElementById("js-editor").classList.add("hidden");
+
+    document.getElementById(`${editor}-editor`).classList.remove("hidden");
+
+    const tabs = document.querySelectorAll(".tab-button");
+    tabs.forEach(tab => tab.classList.remove("active"));
+
+    // Fix: allow 'js' to match 'JavaScript' tab
+    let activeTab = null;
+    if (editor === 'js') {
+        activeTab = Array.from(tabs).find(tab => tab.textContent.trim().toLowerCase() === 'javascript');
+    } else {
+        activeTab = Array.from(tabs).find(tab => tab.textContent.trim().toLowerCase() === editor);
+    }
+    if (activeTab) activeTab.classList.add("active");
+}
+
+// --- JS Terminal Modal Logic ---
+const jsTerminalModal = document.getElementById('jsTerminalModal');
+const jsTerminalInput = document.getElementById('jsTerminalInput');
+const jsTerminalOutput = document.getElementById('jsTerminalOutput');
+const toggleTerminalBtn = document.getElementById('toggleTerminalBtn');
+const closeJsTerminal = document.getElementById('closeJsTerminal');
+const jsTerminalHeader = document.querySelector('.js-terminal-header');
+
+
+if (toggleTerminalBtn && jsTerminalModal) {
+    toggleTerminalBtn.addEventListener('click', () => {
+        jsTerminalModal.classList.toggle('hidden');
+        if (!jsTerminalModal.classList.contains('hidden')) {
+            jsTerminalInput.value = '';
+            jsTerminalInput.focus();
+            // Optionally clear output each time opened:
+            // jsTerminalOutput.innerHTML = '';
+        }
+    });
+}
+if (closeJsTerminal && jsTerminalModal) {
+    closeJsTerminal.addEventListener('click', () => {
+        jsTerminalModal.classList.add('hidden');
+    });
+}
+
+if (jsTerminalInput && jsTerminalOutput) {
+    // Auto-resize textarea
+    function autoResizeTextarea(el) {
+        el.style.height = 'auto';
+        el.style.height = (el.scrollHeight) + 'px';
+    }
+    jsTerminalInput.addEventListener('input', function() {
+        autoResizeTextarea(this);
+    });
+    jsTerminalInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            const code = jsTerminalInput.value;
+            if (code.trim() === '') return;
+            let result;
+            let isError = false;
+            let logs = [];
+            // Patch console.log to capture output
+            const originalConsoleLog = console.log;
+            console.log = function(...args) {
+                logs.push(args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' '));
+                originalConsoleLog.apply(console, args);
+            };
+            try {
+                // eslint-disable-next-line no-eval
+                result = eval(code);
+            } catch (err) {
+                result = err;
+                isError = true;
+            }
+            console.log = originalConsoleLog;
+            let outputHtml = `<div><span style='color:#0f0;'>&gt; ${code.replace(/\n/g, '<br>')}</span>`;
+            if (logs.length > 0) {
+                outputHtml += `<br><span style='color:#0af;'>${logs.join('<br>')}</span>`;
+            }
+            if (isError) {
+                outputHtml += `<br><span style='color:#f55;'>${result}</span>`;
+            } else if (typeof result !== 'undefined' && !isError) {
+                outputHtml += `<br><span style='color:#fff;'>${result}</span>`;
+            }
+            outputHtml += `</div>`;
+            jsTerminalOutput.innerHTML += outputHtml;
+            jsTerminalInput.value = '';
+            autoResizeTextarea(jsTerminalInput);
+            jsTerminalOutput.scrollTop = jsTerminalOutput.scrollHeight;
+            jsTerminalInput.focus();
+        } else if (e.key === 'Enter' && e.shiftKey) {
+            // Let Shift+Enter insert a newline (default behavior)
+            setTimeout(() => autoResizeTextarea(jsTerminalInput), 0);
+        }
+    });
+    // Initial resize
+    autoResizeTextarea(jsTerminalInput);
+}
+
