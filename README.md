@@ -1,5 +1,7 @@
 # Quick Code Studio
 
+![Quick COde Studio](/Img/new-logo-removebg-preview.png)
+
 Quick Code Studio is a web-based code editor and management platform. It provides a simple interface for users to write, edit, and manage code snippets, with authentication and user management features.
 
 ## Features
@@ -74,5 +76,6 @@ The app will be available at `http://localhost:3000` (or the port specified in y
 
 ## Author
 - GIrish Suthar
+
 
 
