@@ -31,11 +31,18 @@ body {
     text-transform: uppercase;
     font-family: sans-serif;
     font-style: italic;
-    font-weight: 700;
-    background: var(--gradient-2);
+    font-weight: bold;
+    font-size: 2rem;
+    background: var(--gradient-1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+/* .brand {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 10px;
+} */
 
 .editor {
     display: flex;
@@ -44,17 +51,16 @@ body {
 }
 
 .code-editor {
-    /* max-width: 40%; */
     padding: 5px;
-    margin: 5px;
     width: 100%;
     display: flex;
     flex-direction: column;
+    line-height: 1.6;
 }
 
 iframe {
     border: 2px solid black;
-    height: 100vh;
+    height: auto;
     width: 100%;
     background: white;
 }
@@ -65,7 +71,7 @@ iframe {
     justify-content: space-between;
     border: 2px solid black;
     background: #282822;
-    padding: 10px;
+    padding: 8px;
 }
 
 .run-btn .run-code {
@@ -81,17 +87,64 @@ iframe {
     opacity: 0.5;
 }
 
-.html {
-    background-color: #dc4c24;
+.editor-tabs {
+    display: flex;
+    background: #1e1e1e;
 }
 
-.css {
-    background-color: #663296;
+.tab-button {
+    position: relative;
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background: #282822;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.tab-button .fa-html5 {
+    color: #ff7b00;
+}
+
+.tab-button .fa-css {
+    color: #7d00fa;
+}
+
+.tab-button .fa-js {
+    color: #ffc905;
+}
+
+.tab-button.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 100%;
+    background: var(--gradient-1);
+    z-index: 1;
+}
+
+.editor-section {
+    display: block;
+}
+
+.editor-section.hidden {
+    display: none;
 }
 
 .output {
-    background-color: #0f9e59;
+    /* background-color: #0969b7; */
+    background-color: #a3ecff;
+    color: black !important;
 }
+
 
 .theme {
     border: 1px solid white;
@@ -120,26 +173,6 @@ iframe {
     height: 100vh;
 }
 
-.editor-label {
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-    padding: 5px 10px;
-    background: #41423b;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    text-align: left;
-}
-
-.html-label {
-    color: #fbff5b;
-}
-
-.css-label {
-    color: #4ccbff;
-}
-
-/* CSS Code */
 .menu-btn {
     background: none;
     border: none;
@@ -148,6 +181,86 @@ iframe {
     cursor: pointer;
     display: none;
     padding: 10px;
+}
+
+/* JS Terminal Modal Styles */
+.js-terminal-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #181818;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    z-index: 9999;
+    width: 700px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #444;
+}
+
+.js-terminal-modal.hidden {
+    display: none;
+}
+
+.js-terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #222;
+    border-bottom: 1px solid #444;
+    font-size: 1.2em;
+}
+
+.js-terminal-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 10px 20px 20px 20px;
+}
+
+.js-terminal-output {
+    background: #111;
+    color: #fff;
+    font-family: monospace;
+    font-size: 1.5em;
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #333;
+}
+
+.js-terminal-input {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background: #222;
+    color: #fff;
+    font-size: 1.5em;
+    font-family: monospace;
+    height: 25px;
+}
+
+.terminal {
+    background: #4d4e4a;
+    border: 2px solid white;
+    font-weight: bolder;
+}
+
+@media (max-width: 600px) {
+    .js-terminal-modal {
+        width: 98vw;
+        min-width: 0;
+        padding: 0;
+    }
+    .js-terminal-header, .js-terminal-body {
+        padding: 8px 8px;
+    }
 }
 
 @media (max-width: 768px) {
