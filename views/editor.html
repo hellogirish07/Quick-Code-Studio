@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Made By :- 
-    1, Girish Suthar 
-    2, Vishva Raj Singh 
-    3, Dolly Sharma
-    4, Aman Singh
--->
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live HTML Editor</title>
-    <link rel="icon" type="image/x-icon" href="./logo.ico">
+    <link rel="icon" type="image/x-icon" href="/Img/new-logo-removebg-preview.png">
 
     <!-- CodeMirror CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
@@ -36,16 +29,15 @@
         <!-- Navbar -->
         <div class="run-btn">
             <div class="heading-box">
-                <img src="./Img/logo.png" alt="">
-                <h1 class="heading">Quick Code Studio</h1>
+                <img src="/Img/new-logo-removebg-preview.png" alt="">
+                <h1 class="heading brand">Quick Code Studio</h1>
             </div>
 
             <div class="sattings-btn">
-                <button class="run-code html" onclick="toggleHTML()">HTML <span
-                        class="status-circle filled"></span></button>
-                <button class="run-code css" onclick="toggleCSS()">CSS <span
-                        class="status-circle filled"></span></button>
-                <button class="run-code output" onclick="openFullScreenOutput()"><i class="fas fa-expand"></i> Full Screen</button>
+                <button class="run-code output" onclick="openFullScreenOutput()"><i class="fas fa-expand"></i> Full
+                    Screen</button>
+                <button class="run-code terminal" id="toggleTerminalBtn"><i class="fas fa-terminal"></i>
+                    Terminal</button>
                 <a class="settings" id="settingsBtn"><i class="fas fa-cog"></i></a>
             </div>
         </div>
@@ -53,11 +45,35 @@
         <!-- Editor -->
         <div class="editor">
             <div class="code-editor">
-                <div class="editor-label html-label">HTML Editor</div>
-                <textarea id="htmlCode" placeholder="Enter HTML Code here"></textarea>
-                <div class="editor-label css-label">CSS Editor</div>
-                <textarea id="cssCode" placeholder="Enter CSS Code here"></textarea>
+                <div class="editor-tabs">
+                    <button class="tab-button active" onclick="showEditor('html')"><i class="fa-brands fa-html5"></i> HTML</button>
+                    <button class="tab-button" onclick="showEditor('css')"><i class="fa-brands fa-css"></i> CSS</button>
+                    <button class="tab-button" onclick="showEditor('js')"><i class="fa-brands fa-js"></i> JavaScript</button>
+                </div>
+
+                <div id="html-editor" class="editor-section">
+                    <textarea id="htmlCode" placeholder="Enter HTML Code here"><!-- HTML Code ---> </textarea>
+                </div>
+                <div id="css-editor" class="editor-section hidden">
+                    <textarea id="cssCode" placeholder="Enter CSS Code here">/* CSS Code */</textarea>
+                </div>
+                <div id="js-editor" class="editor-section hidden">
+                    <textarea id="jsCode" placeholder="Enter JavaScript Code here">// JavaScript Code</textarea>
+                </div>
+
+                <!-- JS Terminal Modal -->
+                <div id="jsTerminalModal" class="js-terminal-modal hidden">
+                    <div class="js-terminal-header">
+                        <span>JavaScript Terminal</span>
+                        <button id="closeJsTerminal" class="close-btn"><i class="fa-solid fa-circle-xmark"></i></button>
+                    </div>
+                    <div class="js-terminal-body">
+                        <div id="jsTerminalOutput" class="js-terminal-output"></div>
+                        <textarea id="jsTerminalInput" class="js-terminal-input" rows="2" placeholder="Type JS and press Enter..." style="resize:none;"></textarea>
+                    </div>
+                </div>
             </div>
+
             <iframe id="preview" src="about:blank"></iframe>
         </div>
     </div>
