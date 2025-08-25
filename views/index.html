@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quick Code Studio - Live HTML Editor</title>
-    <link rel="icon" type="image/x-icon" href="./logo.ico">
+     <link rel="icon" type="image/x-icon" href="/Img/new-logo-removebg-preview.png">
     <link rel="stylesheet" href="/public/css/index.css">
     <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="/public/css/resp.css" class="css">
@@ -21,7 +21,7 @@
     <header class="header">
         <nav class="navbar">
             <div class="logo-box">
-                <img src="./Img/logo.png" alt="Logo" class="logo">
+                <img src="/Img/new-logo-removebg-preview.png" alt="Logo" class="logo">
                 <h1 class="brand">Quick Code Studio</h1>
             </div>
             <ul class="nav-links">
@@ -38,7 +38,7 @@
 
     <section class="hero">
         <div class="hero-content fade-in" data-animate>
-            <h1 class="main-heading">Experience Coding in<br>Real Time with <br> Quick Code Studio</h1>
+            <h1 class="main-heading">Experience Coding in<br> Real Time with <br> Quick Code Studio</h1>
             <p class="sub-heading">Write, edit, and preview your HTML and CSS code instantly, without any hassle.</p>
             <div class="hero-btn">
                 <a onclick="location.href='/signin.html'" class="cta-btn primary">Start Coding</a>
@@ -47,7 +47,7 @@
         </div>
         <div class="hero-image fade-in" data-animate>
             <div class="image-container">
-                <img src="./Img/preview-2.png" alt="Code Editor Preview">
+                <img src="/Img/new-logo-removebg-preview.png" alt="Code Editor Preview">
                 <div class="image-overlay"></div>
             </div>
         </div>
@@ -74,7 +74,7 @@
                 <div class="feature-icon">
                     <i class="fas fa-exchange-alt"></i>
                 </div>
-                <h3>Toggle Between HTML and CSS</h3>
+                <h3>Toggle Between HTML, CSS and JS</h3>
                 <p>Easily switch between editing HTML and CSS code with a single click. Customize your web pages on the
                     go.</p>
             </div>
@@ -103,7 +103,7 @@
             </div>
             <div class="about-image">
                 <div class="image-container">
-                    <img src="./Img/preview-2.png" alt="Code Editor Preview">
+                    <img src="/Img/new-logo-removebg-preview.png" alt="Code Editor Preview">
                     <div class="image-overlay"></div>
                 </div>
             </div>
@@ -148,9 +148,7 @@
     <section id="contact" class="contact fade-in" data-animate>
         <h2 class="section-heading">Get In Touch</h2>
         <p>If you have any questions or feedback, feel free to reach out to us. We'd love to hear from you!</p>
-        <form id="contactForm" class="contact-form"
-            action="https://api.web3forms.com/submit"
-            method="POST">
+        <form id="contactForm" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="33d44239-b74e-45c4-be8a-5c9f3feaab1d">
 
             <div class="form-group">
@@ -170,21 +168,46 @@
         <p id="responseMessage"></p>
     </section>
 
+
     <footer class="footer">
         <div class="footer-content">
             <div class="logo-box">
-                <img src="./Img/logo.png" alt="Logo" class="logo">
-                <h1 class="brand">Quick Code Studio</h1>
+                <div class="logo-container">
+                    <img src="/Img/new-logo-removebg-preview.png" alt="Logo" class="logo">
+                    <h1 class="brand"> Quick Code Studio</h1>
+                </div>
+
+                <div class="team">
+                    <h3>Meet the Team</h3>
+                    <ul class="team-list">
+                        <li>Girish Suthar</li>
+                        <li>Vishv Raj Singh</li>
+                        <li>Dolly Sharma</li>
+                    </ul>
+                </div>
+                <div class="contact-info">
+                    <h3>Contact Us</h3>
+                    <ul class="team-list">
+                        <li>Email: qucickcodestudio123@gmail.com</li>
+                        <li>Phone: +91 1234567890</li>
+                        <li>Address: 123 Quick Code St, Coding City, CodeLand</li>
+
+
+
+                        <div class="newsletter">
+                            <form class="newsletter-form" id="newsletterForm">
+                                <!-- <h3>Subscribe to our Newsletter</h3> -->
+                                <input type="email" name="newsletterEmail" id="newsletterEmail"
+                                    placeholder="Your email address" required>
+                                <button type="submit" class="submit-btn">Subscribe</button>
+                            </form>
+                        </div>
+                    </ul>
+                </div>
             </div>
-            <div class="team">
-                <h3>Meet the Team</h3>
-                <ul class="team-list">
-                    <li>Girish Suthar</li>
-                    <li>Vishv Raj Singh</li>
-                    <li>Dolly Sharma</li>
-                    <li>Aman Singh Chauhan</li>
-                </ul>
-            </div>
+
+
+
             <div class="social-links">
                 <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
                 <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -195,6 +218,33 @@
     </footer>
 
     <script src="/public/js/google-form.js"></script>
+    <script>
+        // Typing animation for main-heading lines, sequentially
+        document.addEventListener('DOMContentLoaded', function () {
+            const lines = [
+                ...document.querySelectorAll('.main-heading')
+            ];
+            const texts = lines.map(line => line.textContent);
+            lines.forEach(line => line.textContent = '');
+            let lineIdx = 0;
+            let charIdx = 0;
+            function typeLine() {
+                if (lineIdx >= lines.length) return;
+                const currentLine = lines[lineIdx];
+                const fullText = texts[lineIdx];
+                if (charIdx < fullText.length) {
+                    currentLine.textContent += fullText[charIdx];
+                    charIdx++;
+                    setTimeout(typeLine, 100); // Adjust typing speed here
+                } else {
+                    lineIdx++;
+                    charIdx = 0;
+                    setTimeout(typeLine, 500); // Pause before next line
+                }
+            }
+            typeLine();
+        });
+    </script>
 </body>
 
 </html>
