@@ -38,35 +38,6 @@ body {
     color: #fff;
 }
 
-/* .container {
-    max-width: 1200px;
-    margin: auto;
-    margin-top: 50px;
-    padding: 50px;
-    border-radius: 15px;
-    
-} */
-
-/* h2 {
-    color: #333333;
-    margin-bottom: 20px;
-} */
-
-/* button.secondary {
-    background-color: #008cba;
-}
-
-button.secondary:hover {
-    background-color: #0077a3;
-} */
-
-/* Index Page Specific */
-/* .welcome-message {
-    color: #333;
-    font-size: 18px;
-    margin-top: 10px;
-} */
-
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -78,41 +49,6 @@ button.secondary:hover {
 .contact-form button {
     margin: 5px;
 }
-
-/* .contact-form input,
-.contact-form textarea {
-    font-size: 25px;
-    padding: 10px;
-    padding-left: 15px;
-    margin-bottom: 15px;
-    background: transparent;
-    border: none;
-    outline: none;
-    border-bottom: 2px solid #ccc;
-    border-radius: 5px;
-    transition: all 0.3s ease-in-out;
-
-    &:focus {
-        border-bottom: 4px solid #38ada9;
-        color: #38ada9;
-    }
-} */
-
-/* .contact-form button {
-    margin: 5px;
-    padding: 10px 20px;
-    background-color: #38ada9;
-    color: white;
-    font-weight: bold;
-    font-size: 25px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-        background-color: #2c7868;
-    }
-} */
 
 @keyframes fadeIn {
     0% {
